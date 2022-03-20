@@ -6,7 +6,7 @@ const filesDirectory = "Sources";
 let menu = [
     'Refine Unique Items In The Same File', 
     'Find Abandoned Items Between To Files'
-]
+];
 let menuIndex = readlineSync.keyInSelect(menu, 'Menu');
 
 if(menu[menuIndex] === "Refine Unique Items In The Same File"){
@@ -36,15 +36,15 @@ else{
         console.log(`A new file is written named ${newFileName} with total ${result.data.length} items.`);
         console.log('Thank You for using this software. Love From Istiaq Hasan AKA Jonab Istiaq Shaheb');
     } else {
-    // Another key was pressed.
-    console.log('Thank You for using this software. Love From Istiaq Hasan AKA Jonab Istiaq Shaheb');
+        // Another key was pressed.
+        console.log('Thank You for using this software. Love From Istiaq Hasan AKA Jonab Istiaq Shaheb');
     }
 }
     
 
 
 function refineData(fileToRead){
-    let unrefinedData = fs.readFileSync(`./${filesDirectory}/${fileToRead}.txt`).toString().split(",");
+    let unrefinedData = fs.readFileSync(`./${filesDirectory}/${fileToRead}.txt`).toString().toLowerCase().split(",");
     let refinedData = [...new Set(unrefinedData)];
     return {
         total : unrefinedData.length,
@@ -59,8 +59,8 @@ function writeToNewFile(newFileName, data){
 }
 
 function abandonedItems(sourceFile, fileToMatch){
-    let sourceFileItems = fs.readFileSync(`./${filesDirectory}/${sourceFile}.txt`).toString().split(",");
-    let fileToMatchItems = fs.readFileSync(`./${filesDirectory}/${fileToMatch}.txt`).toString().split(",");
+    let sourceFileItems = fs.readFileSync(`./${filesDirectory}/${sourceFile}.txt`).toString().toLowerCase().split(",");
+    let fileToMatchItems = fs.readFileSync(`./${filesDirectory}/${fileToMatch}.txt`).toString().toLowerCase().split(",");
     let abandonedItems = sourceFileItems.filter(function(item) { return fileToMatchItems.indexOf(item) == -1; });
     return {
         total : sourceFileItems.length,
